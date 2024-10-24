@@ -22,14 +22,6 @@ func main() {
 
 	flag.Parse()
 
-	// Validate arguments
-	if *networkRange == "" {
-		fmt.Println("Please provide a network range using -range option (e.g., 192.168.1.0/24)")
-		os.Exit(1)
-	}
-
-	fmt.Printf("Scanning network: %s with timeout: %d ms\n", *networkRange, *timeout)
-
 	if *networkRange == "" {
 		localIP, networkRangeCIDR, err := internal.GetLocalNetworkInfo()
 		if err != nil {
