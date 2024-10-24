@@ -118,7 +118,6 @@ func ScanNetwork(networkRange string, timeout int, startPort int, endPort int, p
 			defer func() { <-guard }()
 			defer bar.Increment()
 			retries := 2
-			openPorts := []int{}
 			if Ping(ip, timeout, retries) {
 				macAddress, err := GetMACAddress(ip)
 				if err != nil {
@@ -126,7 +125,7 @@ func ScanNetwork(networkRange string, timeout int, startPort int, endPort int, p
 				} else {
 					fmt.Printf("IP %s is active, MAC Address: %s\n", ip, macAddress)
 				}
-				openPorts = ScanPorts(ip, startPort, endPort, portTimeout)
+				openPorts := ScanPorts(ip, startPort, endPort, portTimeout)
 				result := ScanResult{
 					IP:        ip,
 					MAC:       macAddress,
